@@ -1,35 +1,36 @@
-﻿using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Text;
 
 namespace Domain.Entities;
 public class Author
 {
     public int AuthorId { get; private init; }
-    public string NameOfAuthor { get; private set; }
+    public string Name { get; private set; }
     public DateOnly BirthDate { get; private set; }
+    public int CompositionId { get; set; }
 
-    public Author ( int authorid, string nameofauthor, DateOnly birthdate )
+    public Author( int authorId, string name, DateOnly birthDate )
     {
-        AuthorId = authorid;
-        NameOfAuthor = nameofauthor;
-        BirthDate = birthdate;
+        AuthorId = authorId;
+        Name = name;
+        BirthDate = birthDate;
     }
-    public void SetNameOfAuthor( string nameofauthor )
+    public void SetName( string name )
     {
-        if ( string.IsNullOrWhiteSpace( nameofauthor ) )
+        if ( string.IsNullOrWhiteSpace( name ) )
         {
-            throw new ArgumentException( $"'{nameof( nameofauthor )}' cannot be null or whitespace.", nameof( nameofauthor ) );
+            throw new ArgumentException( $"'{nameof( name )}' cannot be null or whitespace.", nameof( name ) );
         }
 
-        NameOfAuthor = nameofauthor;
+        Name = name;
     }
-    public void SetBirthDate( DateOnly birthdate )
+    public override string ToString()
     {
-        if ( birthdate == DateOnly.MinValue )
-        {
-            throw new ArgumentException( $"'{nameof( birthdate )}' cannot be less then MinValue.", nameof( birthdate ) );
-        }
+        StringBuilder sb = new( 300 );
+        sb.AppendLine( "[Author]" );
+        sb.AppendLine( $"  AuthorId: {AuthorId}" );
+        sb.AppendLine( $"  Name: {Name}" );
+        sb.AppendLine( $"  BirthDate: {BirthDate}" );
 
-        BirthDate = birthdate;
+        return sb.ToString();
     }
 }

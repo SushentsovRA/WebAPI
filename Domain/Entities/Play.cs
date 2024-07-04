@@ -1,24 +1,41 @@
-﻿namespace Domain.Entities;
+﻿using System.Text;
+
+namespace Domain.Entities;
 public class Play
 {
     public int PlayId { get; private init; }
-    public string NameOfPlay { get; private set; }
+    public string Name { get; private set; }
     public DateTime StartDateTimeUtc { get; private set; }
     public DateTime EndDateTimeUtc { get; private set; }
     public int Price { get; private set; }
-    public string PlayDesription { get; private set; }
+    public string Description { get; private set; }
     public int TheaterId { get; private init; }
     public int CompositionId { get; private init; }
 
-    public Play (int playid, string nameofplay, DateTime startdatetimeutc, DateTime enddatetimeutc, int price, string playdesription, int theaterid, int compositionid )
+    public Play( int playId, string name, DateTime startDateTimeUtc, DateTime endDateTimeUtc, int price, string description, int theaterId, int compositionId )
     {
-        PlayId = playid;
-        NameOfPlay = nameofplay;
-        StartDateTimeUtc = startdatetimeutc;
-        EndDateTimeUtc = enddatetimeutc;
+        PlayId = playId;
+        Name = name;
+        StartDateTimeUtc = startDateTimeUtc;
+        EndDateTimeUtc = endDateTimeUtc;
         Price = price;
-        PlayDesription = playdesription;
-        TheaterId = theaterid;
-        CompositionId = compositionid;
+        Description = description;
+        TheaterId = theaterId;
+        CompositionId = compositionId;
+    }
+    public override string ToString()
+    {
+        StringBuilder sb = new( 300 );
+        sb.AppendLine( "[Play]" );
+        sb.AppendLine( $"  PlayId: {PlayId}" );
+        sb.AppendLine( $"  Name: {Name}" );
+        sb.AppendLine( $"  StartDateTimeUtc:{StartDateTimeUtc}" );
+        sb.AppendLine( $"  EndDateTimeUtc:{EndDateTimeUtc}" );
+        sb.AppendLine( $"  Price:{Price}" );
+        sb.AppendLine( $"  Description:{Description}" );
+        sb.AppendLine( $"  TheaterId:{TheaterId}" );
+        sb.AppendLine( $"  CompositionId:{CompositionId}" );
+
+        return sb.ToString();
     }
 }

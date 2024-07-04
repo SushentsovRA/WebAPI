@@ -1,45 +1,62 @@
-﻿namespace Domain.Entities;
+﻿using System.Text;
+
+namespace Domain.Entities;
 public class Composition
 {
     public int CompositionId { get; private init; }
-    public string NameOfComposition { get; private set; }
-    public string CompositionDesription { get; private set; }
+    public string Name { get; private set; }
+    public string Description { get; private set; }
     public string HeroesInfo { get; private set; }
     public int AuthorId { get; private init; }
+    public List<Author> Authors { get; set; } = new List<Author>();
+    public List<Play> Plays { get; set; } = new List<Play>();
 
-    public Composition ( int compositionid, string nameofcomposition, string compositiondesription, string heroesinfo, int authorid)
+
+    public Composition( int compositionId, string name, string description, string heroesInfo, int authorId )
     {
-        CompositionId = compositionid;
-        NameOfComposition = nameofcomposition;
-        CompositionDesription = compositiondesription;
-        HeroesInfo = heroesinfo;
-        AuthorId = authorid;
+        CompositionId = compositionId;
+        Name = name;
+        Description = description;
+        HeroesInfo = heroesInfo;
+        AuthorId = authorId;
     }
-    public void SetNameOfComposition( string nameofcomposition )
+    public void SetName( string name )
     {
-        if ( string.IsNullOrWhiteSpace( nameofcomposition ) )
+        if ( string.IsNullOrWhiteSpace( name ) )
         {
-            throw new ArgumentException( $"'{nameof( nameofcomposition )}' cannot be null or whitespace.", nameof( nameofcomposition ) );
+            throw new ArgumentException( $"'{nameof( name )}' cannot be null or whitespace.", nameof( name ) );
         }
 
-        NameOfComposition = nameofcomposition;
+        Name = name;
     }
-    public void SetCompositionDesription( string compositiondesription )
+    public void SetDescription( string description )
     {
-        if ( string.IsNullOrWhiteSpace( compositiondesription ) )
+        if ( string.IsNullOrWhiteSpace( description ) )
         {
-            throw new ArgumentException( $"'{nameof( compositiondesription )}' cannot be null or whitespace.", nameof( compositiondesription ) );
+            throw new ArgumentException( $"'{nameof( description )}' cannot be null or whitespace.", nameof( description ) );
         }
 
-        CompositionDesription = compositiondesription;
+        Description = description;
     }
-    public void SetHeroesInfo( string heroesinfo )
+    public void SetHeroesInfo( string heroesInfo )
     {
-        if ( string.IsNullOrWhiteSpace( heroesinfo ) )
+        if ( string.IsNullOrWhiteSpace( heroesInfo ) )
         {
-            throw new ArgumentException( $"'{nameof( heroesinfo )}' cannot be null or whitespace.", nameof( heroesinfo ) );
+            throw new ArgumentException( $"'{nameof( heroesInfo )}' cannot be null or whitespace.", nameof( heroesInfo ) );
         }
 
-        HeroesInfo = heroesinfo;
+        HeroesInfo = heroesInfo;
+    }
+    public override string ToString()
+    {
+        StringBuilder sb = new( 300 );
+        sb.AppendLine( "[Composition]" );
+        sb.AppendLine( $"  CompositionId: {CompositionId}" );
+        sb.AppendLine( $"  Name: {Name}" );
+        sb.AppendLine( $"  Description:{Description}" );
+        sb.AppendLine( $"  HeroesInfo:{HeroesInfo}" );
+        sb.AppendLine( $"  AuthorId:{AuthorId}" );
+
+        return sb.ToString();
     }
 }

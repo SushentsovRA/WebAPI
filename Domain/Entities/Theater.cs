@@ -1,25 +1,30 @@
-﻿namespace Domain.Entities;
+﻿using System.Numerics;
+using System.Text;
+
+namespace Domain.Entities;
 public class Theater
 {
     public int TheaterId { get; private init; }
-    public string NameOfTheater { get; private set; }
+    public string Name { get; private set; }
     public string Address { get; private init; }
     public DateTime FirstOpenDate { get; private init; }
     public TimeOnly OpenTime { get; private set; }
     public TimeOnly CloseTime { get; private set; }
-    public string TheaterDesription { get; private set; }
+    public string Description { get; private set; }
     public string PhoneNumber { get; private set; }
+    public List<Author> Authors { get; private init; } = new List<Author>();
+    public List<Play> Plays { get; private set; } = new List<Play>();
 
-    public Theater (int theaterid, string nameoftheater, string address, DateTime firstopen, TimeOnly opentime, TimeOnly closetime, string theaterdesription, string phonenumber)
+    public Theater (int theaterId, string name, string address, DateTime firstOpenDate, TimeOnly openTime, TimeOnly closeTime, string description, string phoneNumber)
     {
-        TheaterId = theaterid;
-        NameOfTheater = nameoftheater;
+        TheaterId = theaterId;
+        Name = name;
         Address = address;
-        FirstOpenDate = firstopen;
-        OpenTime = opentime;
-        CloseTime = closetime;
-        TheaterDesription = theaterdesription;
-        PhoneNumber = phonenumber;
+        FirstOpenDate = firstOpenDate;
+        OpenTime = openTime;
+        CloseTime = closeTime;
+        Description = description;
+        PhoneNumber = phoneNumber;
     }
     public void SetName( string name )
     {
@@ -29,5 +34,20 @@ public class Theater
         }
 
         Name = name;
+    }
+    public override string ToString()
+    {
+        StringBuilder sb = new( 300 );
+        sb.AppendLine( "[Theater]" );
+        sb.AppendLine( $"  TheaterId: {TheaterId}" );
+        sb.AppendLine( $"  Name: {Name}" );
+        sb.AppendLine( $"  Address: {Address}" );
+        sb.AppendLine( $"  FirstOpenDate: {FirstOpenDate}" );
+        sb.AppendLine( $"  OpenTime: {OpenTime}" );
+        sb.AppendLine( $"  CloseTime: {CloseTime}" );
+        sb.AppendLine( $"  Description: {Description}" );
+        sb.AppendLine( $"  PhoneNumber: {PhoneNumber}" );
+
+        return sb.ToString();
     }
 }
