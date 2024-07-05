@@ -15,9 +15,9 @@ public class Theater
     public List<Author> Authors { get; private init; } = new List<Author>();
     public List<Play> Plays { get; private set; } = new List<Play>();
 
-    public Theater (int theaterId, string name, string address, DateTime firstOpenDate, TimeOnly openTime, TimeOnly closeTime, string description, string phoneNumber)
+    public Theater (string name, string address, DateTime firstOpenDate, TimeOnly openTime, TimeOnly closeTime, string description, string phoneNumber)
     {
-        TheaterId = theaterId;
+        
         Name = name;
         Address = address;
         FirstOpenDate = firstOpenDate;
