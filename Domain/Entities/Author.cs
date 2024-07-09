@@ -6,7 +6,7 @@ public class Author
     public int AuthorId { get; private init; }
     public string Name { get; private set; }
     public DateOnly BirthDate { get; private set; }
-    public int CompositionId { get; set; }
+    public List<Composition> Compositions { get; set; } = new List<Composition>();
 
     public Author( int authorId, string name, DateOnly birthDate )
     {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(WebAPIDbContext))]
-    [Migration("20240704182116_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240709185543_Initial_Migration")]
+    partial class Initial_Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,9 +36,6 @@ namespace Infrastructure.Migrations
                     b.Property<DateOnly>("BirthDate")
                         .HasColumnType("date");
 
-                    b.Property<int>("CompositionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -48,8 +45,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("AuthorId");
-
-                    b.HasIndex("CompositionId");
 
                     b.HasIndex("TheaterId");
 
@@ -84,6 +79,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("CompositionId");
 
+                    b.HasIndex("AuthorId");
+
                     b.ToTable("Composition", (string)null);
                 });
 
@@ -111,8 +108,8 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
 
                     b.Property<DateTime>("StartDateTimeUtc")
                         .HasColumnType("datetime2");
@@ -173,15 +170,18 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Author", b =>
                 {
-                    b.HasOne("Domain.Entities.Composition", null)
-                        .WithMany("Authors")
-                        .HasForeignKey("CompositionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.Theater", null)
                         .WithMany("Authors")
                         .HasForeignKey("TheaterId");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Composition", b =>
+                {
+                    b.HasOne("Domain.Entities.Author", null)
+                        .WithMany("Compositions")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Play", b =>
@@ -199,10 +199,13 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Entities.Author", b =>
+                {
+                    b.Navigation("Compositions");
+                });
+
             modelBuilder.Entity("Domain.Entities.Composition", b =>
                 {
-                    b.Navigation("Authors");
-
                     b.Navigation("Plays");
                 });
 

@@ -6,7 +6,7 @@ public class WebAPIDbContext : DbContext
 {
     public WebAPIDbContext( DbContextOptions options )
         : base( options )
-    { 
+    {
     }
     protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
     {

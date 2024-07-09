@@ -25,7 +25,7 @@ public class PlayConfiguration : IEntityTypeConfiguration<Play>
         builder.Property( p => p.EndDateTimeUtc )
                .IsRequired();
 
-        builder.Property( p => p.Price )
+        builder.Property( p => p.Price ).HasColumnType( "money" )
                .IsRequired();
 
         builder.Property( p => p.Description )

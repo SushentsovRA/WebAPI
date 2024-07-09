@@ -13,8 +13,13 @@ public class AuthorConfiguration : IEntityTypeConfiguration<Author>
         builder.Property( a => a.Name )
                .HasMaxLength( 50 )
                .IsRequired();
-        
+
         builder.Property( a => a.BirthDate )
+               .IsRequired();
+
+        builder.HasMany( a => a.Compositions )
+               .WithOne()
+               .HasForeignKey( e => e.AuthorId )
                .IsRequired();
     }
 }

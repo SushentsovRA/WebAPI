@@ -21,9 +21,5 @@ public class CompositionConfiguration : IEntityTypeConfiguration<Composition>
         builder.Property( c => c.HeroesInfo )
                .HasMaxLength( 100 )
                .IsRequired();
-
-        builder.HasMany( c => c.Authors )
-               .WithOne( )
-               .HasForeignKey( t => t.CompositionId );
     }
 }

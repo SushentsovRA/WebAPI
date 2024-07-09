@@ -8,9 +8,7 @@ public class Composition
     public string Description { get; private set; }
     public string HeroesInfo { get; private set; }
     public int AuthorId { get; private init; }
-    public List<Author> Authors { get; set; } = new List<Author>();
     public List<Play> Plays { get; set; } = new List<Play>();
-
 
     public Composition( int compositionId, string name, string description, string heroesInfo, int authorId )
     {
