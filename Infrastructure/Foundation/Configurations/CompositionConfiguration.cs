@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Foundation.Configurations;
+
 public class CompositionConfiguration : IEntityTypeConfiguration<Composition>
 {
     public void Configure( EntityTypeBuilder<Composition> builder )

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Foundation.Configurations;
+
 public class PlayConfiguration : IEntityTypeConfiguration<Play>
 {
     public void Configure( EntityTypeBuilder<Play> builder )
