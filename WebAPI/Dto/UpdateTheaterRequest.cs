@@ -2,7 +2,7 @@
 
 namespace WebAPI.Dto;
 
-public class CreateTheaterRequest
+public class UpdateTheaterRequest
 {
     [JsonPropertyName( "name" )]
     public string Name { get; private set; }

@@ -3,17 +3,23 @@
 namespace Domain.Entities;
 public class Author
 {
+    private string _name;
+    private DateOnly _birthDate;
+
     public int AuthorId { get; private init; }
+
     public string Name { get; private set; }
+
     public DateOnly BirthDate { get; private set; }
+
     public List<Composition> Compositions { get; set; } = new List<Composition>();
 
-    public Author( int authorId, string name, DateOnly birthDate )
+    public Author( string name, DateOnly birthDate )
     {
-        AuthorId = authorId;
         Name = name;
         BirthDate = birthDate;
     }
+
     public void SetName( string name )
     {
         if ( string.IsNullOrWhiteSpace( name ) )
@@ -23,6 +29,7 @@ public class Author
 
         Name = name;
     }
+
     public override string ToString()
     {
         StringBuilder sb = new( 300 );

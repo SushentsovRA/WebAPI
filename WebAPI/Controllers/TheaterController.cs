@@ -17,7 +17,7 @@ public class TheaterController : ControllerBase
     }
 
     [HttpPost( "" )]
-    public IActionResult CreateHotel( [FromBody] CreateHotelRequest request )
+    public IActionResult CreateTheater( [FromBody] CreateTheaterRequest request )
     {
         Theater theater = new( request.Name, request.Address, request.FirstOpenDate, request.OpenTime, request.CloseTime, request.Description, request.PhoneNumber );
         _theaterRepository.Save( theater );
